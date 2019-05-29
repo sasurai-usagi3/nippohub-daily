@@ -53,6 +53,14 @@ export default {
         this.title = dailyReport.title;
         this.content = dailyReport.content;
       });
+    } else {
+      const today = new Date();
+      const alignDigit = x => `0${x}`.slice(-2);
+      const todayStr = `${today.getFullYear()}-${alignDigit(today.getMonth() + 1)}-${alignDigit(today.getDate())}`;
+
+      console.log(todayStr);
+
+      this.date = todayStr;
     }
   }
 }
