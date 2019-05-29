@@ -58,8 +58,6 @@ export default {
       const alignDigit = x => `0${x}`.slice(-2);
       const todayStr = `${today.getFullYear()}-${alignDigit(today.getMonth() + 1)}-${alignDigit(today.getDate())}`;
 
-      console.log(todayStr);
-
       this.date = todayStr;
     }
   }
