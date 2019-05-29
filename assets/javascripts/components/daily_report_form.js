@@ -45,10 +45,6 @@ export default {
           return; // TODO: 日報が見つからなかった時の処理
         }
 
-        const createdAt = new Date(dailyReport.createdAt);
-        // TODO: 日付などを0埋めして2桁に保てるようにする
-        const createdAtStr = `${createdAt.getFullYear()}-${createdAt.getMonth()}-${createdAt.getDate()}`;
-
         this.date = dailyReport.date;
         this.title = dailyReport.title;
         this.content = dailyReport.content;
@@ -57,8 +53,6 @@ export default {
       const today = new Date();
       const alignDigit = x => `0${x}`.slice(-2);
       const todayStr = `${today.getFullYear()}-${alignDigit(today.getMonth() + 1)}-${alignDigit(today.getDate())}`;
-
-      console.log(todayStr);
 
       this.date = todayStr;
     }

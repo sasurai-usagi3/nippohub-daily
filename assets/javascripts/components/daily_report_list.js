@@ -21,7 +21,6 @@ export default {
       for(let dailyReportId in dailyReportList) {
         const dailyReport = dailyReportList[dailyReportId];
         const createdAt = new Date(dailyReport.createdAt);
-        // TODO: 日付などを0埋めして2桁に保てるようにする
         const alignDigit = x => `0${x}`.slice(-2);
         const createdAtStr = `${createdAt.getFullYear()}-${alignDigit(createdAt.getMonth() + 1)}-${alignDigit(createdAt.getDate())} ${alignDigit(createdAt.getHours())}:${alignDigit(createdAt.getMinutes())}`;
 
