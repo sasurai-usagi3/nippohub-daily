@@ -19,7 +19,7 @@ export default {
           date: this.date,
           title: this.title,
           content: this.content
-        });
+        }).then(() => location.href = '/');
       } else {
         database.ref(`users/${this.currentUserId}/daily_reports`).push({
           date: this.date,
