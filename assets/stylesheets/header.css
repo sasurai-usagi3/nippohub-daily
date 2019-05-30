@@ -34,3 +34,11 @@
 .p-auth-links__item:nth-of-type(n + 2) {
   margin-left: 0.5rem;
 }
+
+@media(max-width: 640px) {
+  .p-header__container {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+  }
+}

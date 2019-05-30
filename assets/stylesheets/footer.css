@@ -2,3 +2,11 @@
   margin: 0 auto;
   width: 640px;
 }
+
+@media(max-width: 640px) {
+  .p-footer div {
+    width: 100%;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+  }
+}
