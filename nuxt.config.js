@@ -8,6 +8,7 @@ export default {
     title: 'NippoHub',
     meta: [
       {charset: 'utf-8'},
+      {name: 'viewport', content: 'width=device-width,initial-scale=1'},
       {description: '日報管理サービス'},
       {property: 'og:type', content: 'website'},
       {property: 'og:title', content: 'NippoHub'},
