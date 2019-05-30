@@ -1,5 +1,5 @@
 .p-header {
-  padding: 6px 0;
+  padding: 0.5rem 0;
   box-shadow: 0 3px 5px rgba(0,0,0,0.1);
 }
 
@@ -13,7 +13,7 @@
 
 .p-page-title {
   margin: 0;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .p-page-title a {
@@ -32,5 +32,5 @@
 }
 
 .p-auth-links__item:nth-of-type(n + 2) {
-  margin-left: 10px;
+  margin-left: 0.5rem;
 }
