@@ -1,6 +1,10 @@
 import firebase from '~/assets/javascripts/util/firebase.js';
 import RandomStringGenerator from '~/assets/javascripts/util/random_string_generator.js';
 
+const alignDigit = x => `0${x}`.slice(-2);
+const today = new Date();
+const todayStr = `${today.getFullYear()}-${alignDigit(today.getMonth() + 1)}-${alignDigit(today.getDate())}`;
+
 export default {
   props: ['currentUserId', 'dailyReportId'],
   data: function() {
@@ -28,7 +32,7 @@ export default {
           createdAt: Date.now() // TODO: タイムスタンプをサーバ側で生成する
         });
 
-        this.date = null;
+        this.date = todayStr;
         this.title = '';
         this.content = '';
       }
@@ -50,10 +54,6 @@ export default {
         this.content = dailyReport.content;
       });
     } else {
-      const today = new Date();
-      const alignDigit = x => `0${x}`.slice(-2);
-      const todayStr = `${today.getFullYear()}-${alignDigit(today.getMonth() + 1)}-${alignDigit(today.getDate())}`;
-
       this.date = todayStr;
     }
   }

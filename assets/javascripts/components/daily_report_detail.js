@@ -1,4 +1,4 @@
-import marked from 'marked';
+import marked from '~/assets/javascripts/util/marked';
 import firebase from '~/assets/javascripts/util/firebase.js';
 import ShareLink from '~/components/ShareLink.vue';
 

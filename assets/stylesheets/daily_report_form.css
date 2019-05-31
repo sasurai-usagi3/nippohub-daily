@@ -20,3 +20,14 @@
   height: 10em;
   outline: none;
 }
+
+@media(max-width: 640px) {
+  .p-daily-report-form__date-form {
+    width: 100%;
+  }
+
+  .p-daily-report-form__title-form {
+    width: 100%;
+    margin: 1rem 0 0;
+  }
+}
