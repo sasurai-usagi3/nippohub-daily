@@ -1,4 +1,5 @@
 import firebase from '~/assets/javascripts/util/firebase.js';
+import DateConverter from '~/assets/javascripts/util/date_converter';
 
 export default {
   props: ['currentUserId'],
@@ -21,10 +22,8 @@ export default {
       for(let dailyReportId in dailyReportList) {
         const dailyReport = dailyReportList[dailyReportId];
         const createdAt = new Date(dailyReport.createdAt);
-        const alignDigit = x => `0${x}`.slice(-2);
-        const createdAtStr = `${createdAt.getFullYear()}-${alignDigit(createdAt.getMonth() + 1)}-${alignDigit(createdAt.getDate())} ${alignDigit(createdAt.getHours())}:${alignDigit(createdAt.getMinutes())}`;
 
-        dailyReports.push({id: dailyReportId, title: dailyReport.title, createdAt: createdAtStr, date: dailyReport.date});
+        dailyReports.push({id: dailyReportId, title: dailyReport.title, createdAt: DateConverter.dateToString(createdAt), date: dailyReport.date});
       }
 
       this.dailyReports = dailyReports.sort((x1, x2) => {
