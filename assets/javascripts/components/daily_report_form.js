@@ -1,9 +1,6 @@
 import firebase from '~/assets/javascripts/util/firebase.js';
+import DateConverter from '~/assets/javascripts/util/date_converter';
 import RandomStringGenerator from '~/assets/javascripts/util/random_string_generator.js';
-
-const alignDigit = x => `0${x}`.slice(-2);
-const today = new Date();
-const todayStr = `${today.getFullYear()}-${alignDigit(today.getMonth() + 1)}-${alignDigit(today.getDate())}`;
 
 export default {
   props: ['currentUserId', 'dailyReportId'],
@@ -13,6 +10,7 @@ export default {
   methods: {
     post: function() {
       const database = firebase.database();
+      const today = new Date();
 
       if(this.currentUserId == null) {
         return;
@@ -32,7 +30,7 @@ export default {
           createdAt: Date.now() // TODO: タイムスタンプをサーバ側で生成する
         });
 
-        this.date = todayStr;
+        this.date = DateConverter.dateToString(today);
         this.title = '';
         this.content = '';
       }
@@ -40,6 +38,7 @@ export default {
   },
   mounted: function() {
     const database = firebase.database();
+    const today = new Date();
 
     if(this.currentUserId != null && this.dailyReportId != null) {
       // TODO: DailyReportDetailとまとめる
@@ -54,7 +53,7 @@ export default {
         this.content = dailyReport.content;
       });
     } else {
-      this.date = todayStr;
+      this.date = DateConverter.dateToString(today);
     }
   }
 }
