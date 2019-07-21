@@ -13,5 +13,8 @@
   "dependencies": {
     "firebase": "^5.8.3",
     "marked": "^0.6.2"
+  },
+  "resolutions": {
+    "grpc": "1.20.2"
   }
 }
