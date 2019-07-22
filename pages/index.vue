@@ -5,7 +5,7 @@
       <daily-report-form :currentUserId="currentUserId"></daily-report-form>
       <div>
         <h2 class="p-sub-title">過去の日報(最大30件)</h2>
-        <daily-report-list :currentUserId="currentUserId"></daily-report-list>
+        <daily-report-list :currentUserId="currentUserId" :start-at="$route.query.start_at" :end-at="$route.query.end_at"></daily-report-list>
       </div>
       <!--<div class="u-text-align-right u-mt-075">
         <button type="button" class="p-btn" @click="deleteAll">全削除する</button>
