@@ -15,7 +15,7 @@ export default {
     const database = firebase.database().ref(`users/${this.currentUserId}/daily_reports/`);
 
     database.off(); // TODO: 全イベントハンドラが消えてしまうので範囲を狭める
-    database.orderByChild('date').limitToLast(30).on('value', res => {
+    database.orderByChild('date').startAt('2019-05-02').endAt('2019-05-16').limitToLast(30).on('value', res => {
       const dailyReportList = res.val();
       const dailyReports = [];
 
