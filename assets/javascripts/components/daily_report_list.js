@@ -2,7 +2,7 @@ import firebase from '~/assets/javascripts/util/firebase.js';
 import DateConverter from '~/assets/javascripts/util/date_converter';
 
 export default {
-  props: ['currentUserId'],
+  props: ['startAt', 'endAt', 'currentUserId'],
   data: function() {
     return {dailyReports: [
     ]};
@@ -13,9 +13,18 @@ export default {
     }
 
     const database = firebase.database().ref(`users/${this.currentUserId}/daily_reports/`);
+    let query = database.orderByChild('date');
+
+    if (this.startAt != null && this.startAt !== '') {
+      query = query.startAt(this.startAt);
+    }
+
+    if (this.endAt != null && this.endAt !== '') {
+      query = query.endAt(this.endAt);
+    }
 
     database.off(); // TODO: 全イベントハンドラが消えてしまうので範囲を狭める
-    database.orderByChild('date').startAt('2019-05-02').endAt('2019-05-16').limitToLast(30).on('value', res => {
+    query.on('value', res => {
       const dailyReportList = res.val();
       const dailyReports = [];
 
