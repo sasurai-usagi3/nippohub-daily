@@ -6,6 +6,10 @@
       <div>
         <h2 class="p-sub-title">過去の日報(最大30件)</h2>
         <daily-report-list :currentUserId="currentUserId" :start-at="$route.query.start_at" :end-at="$route.query.end_at"></daily-report-list>
+        <div class="u-mt--2rem" style="display: flex;justify-content: space-between">
+          <nuxt-link :to="{path: '/', query: {start_at: firstDateOfPrevMonth, end_at: endDateOfPrevMonth}}">&lt; 先月</nuxt-link>
+          <nuxt-link :to="{path: '/', query: {start_at: firstDateOfNextMonth, end_at: endDateOfNextMonth}}">次月 &gt;</nuxt-link>
+        </div>
       </div>
       <!--<div class="u-text-align-right u-mt-075">
         <button type="button" class="p-btn" @click="deleteAll">全削除する</button>
