@@ -25,8 +25,8 @@ export default {
 
     return {
       currentUserId: null,
-      firstDate: DateConverter.dateToString(firstDate),
-      endDate: DateConverter.dateToString(endDate),
+      firstDate: DateConverter.dateToString(firstDate, false),
+      endDate: DateConverter.dateToString(endDate, false),
       firstDateOfPrevMonth: DateConverter.dateToString(firstDateOfPrevMonth, false),
       endDateOfPrevMonth: DateConverter.dateToString(endDateOfPrevMonth, false),
       firstDateOfNextMonth: DateConverter.dateToString(firstDateOfNextMonth, false),
