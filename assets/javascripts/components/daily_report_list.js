@@ -14,13 +14,22 @@ export default {
 
     const database = firebase.database().ref(`users/${this.currentUserId}/daily_reports/`);
     let query = database.orderByChild('date');
+    const today = new Date();
 
     if (this.startAt != null && this.startAt !== '') {
       query = query.startAt(this.startAt);
+    } else {
+      const firstDateOfThisMonth = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0, 0);
+
+      query = query.startAt(DateConverter.dateToString(firstDateOfThisMonth, false));
     }
 
     if (this.endAt != null && this.endAt !== '') {
       query = query.endAt(this.endAt);
+    } else {
+      const endDateOfThisMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0, 0, 0, 0, 0); // 年の繰り上げを考えなくてもよしなにやってくれるので問題なし。日付を0にすることで当月の最終日となる
+
+      query = query.endAt(DateConverter.dateToString(endDateOfThisMonth, false));
     }
 
     database.off(); // TODO: 全イベントハンドラが消えてしまうので範囲を狭める
