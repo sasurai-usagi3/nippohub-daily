@@ -30,7 +30,7 @@ export default {
           createdAt: Date.now() // TODO: タイムスタンプをサーバ側で生成する
         });
 
-        this.date = DateConverter.dateToString(today);
+        this.date = DateConverter.dateToString(today, false);
         this.title = '';
         this.content = '';
       }
@@ -53,7 +53,7 @@ export default {
         this.content = dailyReport.content;
       });
     } else {
-      this.date = DateConverter.dateToString(today);
+      this.date = DateConverter.dateToString(today, false);
     }
   }
 }
