@@ -1,13 +1,17 @@
 .p-daily-report-form {
 }
 
-.p-daily-report-form__date-form {
-  width: 20%;
+.p-daily-report-form__title-area {
+  display: flex;
 }
 
-.p-daily-report-form__title-form {
-  margin-left: calc(3% - 0.5em); /* コード中に空白が表示されている関係で1文字分幅削っている */
-  width: 77%;
+.p-daily-report-form__title-area__date-form {
+  flex: 0 0 auto;
+}
+
+.p-daily-report-form__title-area__title-form {
+  flex: 1 0 auto;
+  margin-left: 1em; /* コード中に空白が表示されている関係で1文字分幅削っている */
 }
 
 .p-daily-report-form__content-form {
