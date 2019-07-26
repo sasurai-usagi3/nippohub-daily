@@ -49,25 +49,6 @@ export default {
       return DateConverter.dateToString(new Date(endDate.getFullYear(), endDate.getMonth() + 2, 0, 0, 0, 0, 0), false);
     }
   },
-  methods: {
-    deleteAll: function() {
-      const database = firebase.database().ref('daily_reports/');
-
-      if(this.currentUserId == null) {
-        return;
-      }
-
-      database.orderByChild('userId').equalTo(this.currentUserId).on('value', res => {
-        const dailyReportList = res.val();
-
-        for(let dailyReportId in dailyReportList) {
-          const database = firebase.database().ref(`daily_reports/${dailyReportId}`);
-
-          database.remove();
-        }
-      });
-    }
-  },
   mounted: function() {
     const auth = firebase.auth();
 
