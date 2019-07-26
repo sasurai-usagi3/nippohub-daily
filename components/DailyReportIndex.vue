@@ -19,9 +19,6 @@
           <nuxt-link :to="{path: '/', query: {start_at: firstDateOfNextMonth, end_at: endDateOfNextMonth}}">次月 &gt;</nuxt-link>
         </div>
       </div>
-      <!--<div class="u-text-align-right u-mt-075">
-        <button type="button" class="p-btn" @click="deleteAll">全削除する</button>
-      </div>-->
     </div>
     <main-footer></main-footer>
   </div>
