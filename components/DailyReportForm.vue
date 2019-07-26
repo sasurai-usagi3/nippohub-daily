@@ -1,8 +1,8 @@
 <template>
   <form class="p-daily-report-form" @submit.prevent="post">
-    <div>
-      <input class="p-oneline-input p-daily-report-form__date-form" type="date" placeholder="日付" v-model="date">
-      <input class="p-oneline-input p-daily-report-form__title-form" type="text" placeholder="title" v-model="title">
+    <div class="p-daily-report-form__title-area">
+      <input class="p-oneline-input p-daily-report-form__title-area__date-form" type="date" placeholder="日付" v-model="date">
+      <input class="p-oneline-input p-daily-report-form__title-area__title-form" type="text" placeholder="title" v-model="title">
     </div>
     <div class="u-mt-075" style="line-height: 1">
       <textarea class="p-daily-report-form__content-form" name="content" v-model="content"></textarea>
