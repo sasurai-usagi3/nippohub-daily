@@ -6,6 +6,10 @@
   margin-top: 2rem;
 }
 
-.u-text-align-right {
+.u-mt--3rem {
+  margin-top: 3rem;
+}
+
+.u-text-align-right, .u-text-align--right {
   text-align: right;
 }
