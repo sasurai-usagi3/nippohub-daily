@@ -1,0 +1,11 @@
+.p-share-link {
+  display: flex;
+}
+
+.p-share-link__url {
+  flex: 1 0 auto;
+}
+
+.p-share-link__disable-btn {
+  margin-left: 1em;
+}
