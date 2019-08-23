@@ -3,8 +3,7 @@ import DailyReportRepository from '~/assets/javascripts/repositories/daily_repor
 export default {
   props: ['startAt', 'endAt', 'currentUserId'],
   data: function() {
-    return {dailyReports: [
-    ]};
+    return {dailyReports: []};
   },
   mounted: function() {
     this.attachListener();
