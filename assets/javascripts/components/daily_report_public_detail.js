@@ -1,5 +1,6 @@
 import marked from '~/assets/javascripts/util/marked';
 import firebase from '~/assets/javascripts/util/firebase.js';
+import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
 export default {
   props: ['accessKey'],
@@ -8,6 +9,7 @@ export default {
   },
   mounted: function() {
     const database = firebase.database();
+    const repository = new DailyReportRepository();
 
     new Promise((resolve, reject) => {
       database.ref(`/access_keys/${this.accessKey}`).once('value', r => {
@@ -23,13 +25,16 @@ export default {
       const userId = accessKey.user_id;
       const dailyReportId = accessKey.daily_report_id;
 
-      database.ref(`/users/${userId}/daily_reports/${dailyReportId}`).once('value', r => {
-        const dailyReport = r.val();
-
-        this.title = `${dailyReport.date} ${dailyReport.title}`;
-        this.content = marked(dailyReport.content);
-        this.didFind = true;
-      });
+      repository.fetch(userId, dailyReportId)
+        .then(dailyReport => {
+          this.title = `${dailyReport.date} ${dailyReport.title}`;
+          this.content = marked(dailyReport.content);
+          this.didFind = true;
+        })
+        .catch((x) => {
+          // TODO: 日報が見つからなかった時の処理
+          console.fatal('日報が見つかりません');
+        });
     });
   }
 }
