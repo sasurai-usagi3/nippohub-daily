@@ -37,4 +37,21 @@ export default class DailyReportRepository {
       }).reverse();
     });
   }
+
+  fetch(userId, dailyReportId) {
+    const database = firebase.database();
+
+    return database.ref(`users/${userId}/daily_reports/${dailyReportId}`).once('value').then(r => {
+      const dailyReport = r.val();
+
+      if(dailyReport == null) {
+        Promise.reject();
+        return;
+      }
+
+      const createdAt = new Date(dailyReport.createdAt);
+
+      return new DailyReport(dailyReport.Id, dailyReport.date, dailyReport.title, dailyReport.content, DateConverter.dateToString(createdAt), dailyReport.access_key);
+    });
+  }
 }
