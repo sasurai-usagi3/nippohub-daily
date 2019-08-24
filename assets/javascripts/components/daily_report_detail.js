@@ -20,7 +20,7 @@ export default {
       .then(dailyReport => {
         this.title = `${dailyReport.date} ${dailyReport.title}`;
         this.content = marked(dailyReport.content);
-        this.accessKey = dailyReport.access_key;
+        this.accessKey = dailyReport.accessKey;
         this.didFind = true;
       })
       .catch((x) => {
