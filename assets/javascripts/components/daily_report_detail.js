@@ -1,5 +1,4 @@
 import marked from '~/assets/javascripts/util/marked';
-import firebase from '~/assets/javascripts/util/firebase.js';
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 import ShareLink from '~/components/ShareLink.vue';
 
@@ -23,7 +22,7 @@ export default {
         this.accessKey = dailyReport.accessKey;
         this.didFind = true;
       })
-      .catch((x) => {
+      .catch(() => {
         // TODO: 日報が見つからなかった時の処理
         console.fatal('日報が見つかりません');
       });

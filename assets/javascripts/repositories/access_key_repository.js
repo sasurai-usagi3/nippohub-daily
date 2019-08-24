@@ -25,6 +25,6 @@ export default class AccessKeyRepository {
   }
 
   delete(accessKey) {
-    return firebase.database().ref(`/access_keys/${accessKey}`).set(null);
+    return firebase.database().ref(`/access_keys/${accessKey}`).remove();
   }
 }
