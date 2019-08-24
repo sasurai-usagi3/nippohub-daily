@@ -22,7 +22,7 @@ export default {
         this.accessKey = dailyReport.accessKey;
         this.didFind = true;
       })
-      .catch((x) => {
+      .catch(() => {
         // TODO: 日報が見つからなかった時の処理
         console.fatal('日報が見つかりません');
       });
