@@ -1,4 +1,3 @@
-import firebase from '~/assets/javascripts/util/firebase.js';
 import AccessKeyRepository from '~/assets/javascripts/repositories/access_key_repository';
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
@@ -27,7 +26,6 @@ export default {
       });
     },
     dismissAccessKey: function() {
-      const database = firebase.database();
       const accessKeyRepository = new AccessKeyRepository();
       const dailyReportRepository = new DailyReportRepository();
 

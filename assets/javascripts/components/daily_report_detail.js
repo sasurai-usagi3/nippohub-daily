@@ -1,5 +1,4 @@
 import marked from '~/assets/javascripts/util/marked';
-import firebase from '~/assets/javascripts/util/firebase.js';
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 import ShareLink from '~/components/ShareLink.vue';
 
