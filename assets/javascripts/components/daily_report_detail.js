@@ -1,5 +1,6 @@
 import marked from '~/assets/javascripts/util/marked';
 import firebase from '~/assets/javascripts/util/firebase.js';
+import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 import ShareLink from '~/components/ShareLink.vue';
 
 export default {
@@ -9,22 +10,22 @@ export default {
     return {title: '', content: '', accessKey: null, didFind: false};
   },
   mounted: function() {
-    const database = firebase.database();
-
     if(this.currentUserId == null) {
       return;
     }
 
-    database.ref(`users/${this.currentUserId}/daily_reports/${this.dailyReportId}`).once('value', r => {
-      const dailyReport = r.val();
-      if(dailyReport == null) {
-        return; // TODO: 日報が見つからなかった時の処理
-      }
+    const repository = new DailyReportRepository();
 
-      this.title = `${dailyReport.date} ${dailyReport.title}`;
-      this.content = marked(dailyReport.content);
-      this.accessKey = dailyReport.access_key;
-      this.didFind = true;
-    });
+    repository.fetch(this.currentUserId, this.dailyReportId)
+      .then(dailyReport => {
+        this.title = `${dailyReport.date} ${dailyReport.title}`;
+        this.content = marked(dailyReport.content);
+        this.accessKey = dailyReport.access_key;
+        this.didFind = true;
+      })
+      .catch((x) => {
+        // TODO: 日報が見つからなかった時の処理
+        console.fatal('日報が見つかりません');
+      });
   }
 }

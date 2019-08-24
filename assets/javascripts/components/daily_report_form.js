@@ -1,6 +1,5 @@
-import firebase from '~/assets/javascripts/util/firebase.js';
 import DateConverter from '~/assets/javascripts/util/date_converter';
-import RandomStringGenerator from '~/assets/javascripts/util/random_string_generator.js';
+import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
 export default {
   props: ['currentUserId', 'dailyReportId'],
@@ -9,7 +8,7 @@ export default {
   },
   methods: {
     post: function() {
-      const database = firebase.database();
+      const repository = new DailyReportRepository();
       const today = new Date();
 
       if(this.currentUserId == null) {
@@ -17,41 +16,33 @@ export default {
       }
 
       if(this.dailyReportId != null) {
-        database.ref(`users/${this.currentUserId}/daily_reports/${this.dailyReportId}`).update({
-          date: this.date,
-          title: this.title,
-          content: this.content
-        }).then(() => location.href = '/');
+        repository.update(this.currentUserId, this.dailyReportId, this.date, this.title, this.content)
+          .then(() => location.href = '/');
       } else {
-        database.ref(`users/${this.currentUserId}/daily_reports`).push({
-          date: this.date,
-          title: this.title,
-          content: this.content,
-          createdAt: Date.now() // TODO: タイムスタンプをサーバ側で生成する
-        });
-
-        this.date = DateConverter.dateToString(today, false);
-        this.title = '';
-        this.content = '';
+        repository.create(this.currentUserId, this.date, this.title, this.content)
+          .then(() => {
+            this.date = DateConverter.dateToString(today, false);
+            this.title = '';
+            this.content = '';
+          });
       }
     }
   },
   mounted: function() {
-    const database = firebase.database();
+    const repository = new DailyReportRepository();
     const today = new Date();
 
     if(this.currentUserId != null && this.dailyReportId != null) {
-      // TODO: DailyReportDetailとまとめる
-      database.ref(`users/${this.currentUserId}/daily_reports/${this.dailyReportId}`).once('value', r => {
-        const dailyReport = r.val();
-        if(dailyReport == null) {
-          return; // TODO: 日報が見つからなかった時の処理
-        }
-
-        this.date = dailyReport.date;
-        this.title = dailyReport.title;
-        this.content = dailyReport.content;
-      });
+      repository.fetch(this.currentUserId, this.dailyReportId)
+        .then(dailyReport => {
+          this.date = dailyReport.date;
+          this.title = dailyReport.title;
+          this.content = dailyReport.content;
+        })
+        .catch(() => {
+          // TODO: 日報が見つからなかった時の処理
+          console.fatal('日報が見つかりません');
+        });
     } else {
       this.date = DateConverter.dateToString(today, false);
     }
