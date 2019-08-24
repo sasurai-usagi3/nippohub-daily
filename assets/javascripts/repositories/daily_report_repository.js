@@ -75,4 +75,12 @@ export default class DailyReportRepository {
       content: content
     });
   }
+
+  updateAccessKey(userId, dailyReportId, accessKey) {
+    const database = firebase.database();
+
+    return database.ref(`users/${userId}/daily_reports/${dailyReportId}`).update({
+      access_key: accessKey
+    });
+  }
 }
