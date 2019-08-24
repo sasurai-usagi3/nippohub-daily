@@ -54,4 +54,25 @@ export default class DailyReportRepository {
       return new DailyReport(dailyReport.Id, dailyReport.date, dailyReport.title, dailyReport.content, DateConverter.dateToString(createdAt), dailyReport.access_key);
     });
   }
+
+  create(userId, date, title, content) {
+    const database = firebase.database();
+
+    return database.ref(`users/${userId}/daily_reports`).push({
+      date: date,
+      title: title,
+      content: content,
+      createdAt: Date.now() // TODO: タイムスタンプをサーバ側で生成する
+    });
+  }
+
+  update(userId, dailyReportId, date, title, content) {
+    const database = firebase.database();
+
+    return database.ref(`users/${userId}/daily_reports/${dailyReportId}`).update({
+      date: date,
+      title: title,
+      content: content
+    });
+  }
 }
