@@ -83,4 +83,10 @@ export default class DailyReportRepository {
       access_key: accessKey
     });
   }
+
+  delete(userId, dailyReportId) {
+    const database = firebase.database();
+
+    return database.ref(`users/${userId}/daily_reports/${dailyReportId}`).remove();
+  }
 }

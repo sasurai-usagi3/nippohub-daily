@@ -3,7 +3,7 @@
     <main-header :currentUserId="currentUserId"></main-header>
     <div class="l-container" v-if="currentUserId != null">
       <daily-report-form :currentUserId="currentUserId" :dailyReportId="$route.params.id" v-if="currentUserId != null"></daily-report-form>
-      <ButtonDeletingDailyReport :dailyReportId="$route.params.id"></ButtonDeletingDailyReport>
+      <ButtonDeletingDailyReport :currentUserId="currentUserId" :dailyReportId="$route.params.id"></ButtonDeletingDailyReport>
     </div>
     <main-footer></main-footer>
   </div>
