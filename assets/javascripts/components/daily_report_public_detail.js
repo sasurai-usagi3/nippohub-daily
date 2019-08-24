@@ -1,5 +1,5 @@
 import marked from '~/assets/javascripts/util/marked';
-import firebase from '~/assets/javascripts/util/firebase.js';
+import AccessKeyRepository from '~/assets/javascripts/repositories/access_key_repository';
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
 export default {
@@ -8,33 +8,21 @@ export default {
     return {title: '', content: '', didFind: false};
   },
   mounted: function() {
-    const database = firebase.database();
-    const repository = new DailyReportRepository();
+    const accessKeyRepository = new AccessKeyRepository();
+    const dailyReportRepository = new DailyReportRepository();
 
-    new Promise((resolve, reject) => {
-      database.ref(`/access_keys/${this.accessKey}`).once('value', r => {
-        const accessKey = r.val();
+    accessKeyRepository.fetch(this.accessKey).then(accessKey => {
+      const userId = accessKey.userId;
+      const dailyReportId = accessKey.dailyReportId;
 
-        if(accessKey == null) {
-          reject();
-        }
-
-        resolve(accessKey);
-      });
-    }).then((accessKey) => {
-      const userId = accessKey.user_id;
-      const dailyReportId = accessKey.daily_report_id;
-
-      repository.fetch(userId, dailyReportId)
-        .then(dailyReport => {
-          this.title = `${dailyReport.date} ${dailyReport.title}`;
-          this.content = marked(dailyReport.content);
-          this.didFind = true;
-        })
-        .catch((x) => {
-          // TODO: 日報が見つからなかった時の処理
-          console.fatal('日報が見つかりません');
-        });
+      return dailyReportRepository.fetch(userId, dailyReportId);
+    }).then(dailyReport => {
+      this.title = `${dailyReport.date} ${dailyReport.title}`;
+      this.content = marked(dailyReport.content);
+      this.didFind = true;
+    }).catch(() => {
+      // TODO: 日報が見つからなかった時の処理
+      console.fatal('日報が見つかりません');
     });
   }
 }
