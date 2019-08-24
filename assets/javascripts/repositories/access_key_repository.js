@@ -14,4 +14,17 @@ export default class AccessKeyRepository {
       return new AccessKey(accessKey.user_id, accessKey.daily_report_id);
     });
   }
+
+  create(userId, dailyReportId) {
+    return firebase.database().ref('access_keys').push({
+      user_id: userId,
+      daily_report_id: dailyReportId
+    }).then(r => {
+      return r.key;
+    });
+  }
+
+  delete(accessKey) {
+    return firebase.database().ref(`/access_keys/${accessKey}`).set(null);
+  }
 }
