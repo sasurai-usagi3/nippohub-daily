@@ -1,5 +1,5 @@
 // TODO: 非常に大きいクラスなので分割し直す
-import firebase from '~/assets/javascripts/util/firebase.js';
+import UserRepository from '~/assets/javascripts/repositories/user_repository';
 import DateConverter from '~/assets/javascripts/util/date_converter';
 import MainHeader from '~/components/MainHeader.vue';
 import DailyReportForm from '~/components/DailyReportForm.vue';
@@ -50,10 +50,10 @@ export default {
     }
   },
   mounted: function() {
-    const auth = firebase.auth();
+    const repository = new UserRepository();
 
-    auth.onAuthStateChanged(user => {
-      this.currentUserId = (user != null) ? user.uid : null;
+    repository.fetch().then(user => {
+      this.currentUserId = (user != null) ? user.id : null;
     });
   }
 };

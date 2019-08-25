@@ -1,4 +1,4 @@
-import firebase from '~/assets/javascripts/util/firebase.js';
+import UserRepository from '~/assets/javascripts/repositories/user_repository';
 import MainHeader from '~/components/MainHeader.vue';
 import DailyReportForm from '~/components/DailyReportForm.vue';
 import ButtonDeletingDailyReport from '~/components/ButtonDeletingDailyReport.vue';
@@ -15,11 +15,10 @@ export default {
     return {currentUserId: null}
   },
   mounted: function() {
-    const auth = firebase.auth();
+    const repository = new UserRepository();
 
-    // TODO: indexとまとめる
-    auth.onAuthStateChanged(user => {
-      this.currentUserId = (user != null) ? user.uid : null;
+    repository.fetch().then(user => {
+      this.currentUserId = (user != null) ? user.id : null;
     });
   }
 }
