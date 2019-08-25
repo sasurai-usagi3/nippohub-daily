@@ -17,4 +17,8 @@ export default class UserRepository {
   authorize(email, password) {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
+
+  clearSession() {
+    return firebase.auth().signOut();
+  }
 }
