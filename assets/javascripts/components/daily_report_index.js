@@ -1,5 +1,4 @@
 // TODO: 非常に大きいクラスなので分割し直す
-import UserRepository from '~/assets/javascripts/repositories/user_repository';
 import DateConverter from '~/assets/javascripts/util/date_converter';
 import MainHeader from '~/components/MainHeader.vue';
 import DailyReportForm from '~/components/DailyReportForm.vue';
@@ -7,7 +6,7 @@ import DailyReportList from '~/components/DailyReportList.vue';
 import MainFooter from '~/components/MainFooter.vue';
 
 export default {
-  props: ['startAt', 'endAt'],
+  props: ['startAt', 'endAt', 'currentUser'],
   components: {
     DailyReportForm,
     DailyReportList,
@@ -15,7 +14,12 @@ export default {
     MainFooter
   },
   data: function() {
-    return { currentUserId: null };
+    return {currentUserId: null}; // TODO: currentUserId消す
+  },
+  watch: {
+    currentUser: function() {
+      this.currentUserId = this.currentUser.id;
+    }
   },
   computed: {
     firstDate: function() {
@@ -48,12 +52,5 @@ export default {
 
       return DateConverter.dateToString(new Date(endDate.getFullYear(), endDate.getMonth() + 2, 0, 0, 0, 0, 0), false);
     }
-  },
-  mounted: function() {
-    const repository = new UserRepository();
-
-    repository.fetch().then(user => {
-      this.currentUserId = (user != null) ? user.id : null;
-    });
   }
 };
