@@ -39,9 +39,7 @@ export default class DailyReportRepository {
   }
 
   fetch(userId, dailyReportId) {
-    const database = firebase.database();
-
-    return database.ref(`users/${userId}/daily_reports/${dailyReportId}`).once('value').then(r => {
+    return firebase.database().ref(`users/${userId}/daily_reports/${dailyReportId}`).once('value').then(r => {
       const dailyReport = r.val();
 
       if(dailyReport == null) {
@@ -56,9 +54,7 @@ export default class DailyReportRepository {
   }
 
   create(userId, date, title, content) {
-    const database = firebase.database();
-
-    return database.ref(`users/${userId}/daily_reports`).push({
+    return firebase.database().ref(`users/${userId}/daily_reports`).push({
       date: date,
       title: title,
       content: content,
@@ -67,9 +63,7 @@ export default class DailyReportRepository {
   }
 
   update(userId, dailyReportId, date, title, content) {
-    const database = firebase.database();
-
-    return database.ref(`users/${userId}/daily_reports/${dailyReportId}`).update({
+    return firebase.database().ref(`users/${userId}/daily_reports/${dailyReportId}`).update({
       date: date,
       title: title,
       content: content
@@ -77,16 +71,12 @@ export default class DailyReportRepository {
   }
 
   updateAccessKey(userId, dailyReportId, accessKey) {
-    const database = firebase.database();
-
-    return database.ref(`users/${userId}/daily_reports/${dailyReportId}`).update({
+    return firebase.database().ref(`users/${userId}/daily_reports/${dailyReportId}`).update({
       access_key: accessKey
     });
   }
 
   delete(userId, dailyReportId) {
-    const database = firebase.database();
-
-    return database.ref(`users/${userId}/daily_reports/${dailyReportId}`).remove();
+    return firebase.database().ref(`users/${userId}/daily_reports/${dailyReportId}`).remove();
   }
 }
