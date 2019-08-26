@@ -2,7 +2,7 @@ import DateConverter from '~/assets/javascripts/util/date_converter';
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
 export default {
-  props: ['currentUserId', 'dailyReportId'],
+  props: ['currentUser', 'currentUserId', 'dailyReportId'], // TODO: currentUserId消す
   data: function() {
     return {date: '', title: '', content: ''};
   },
@@ -11,15 +11,17 @@ export default {
       const repository = new DailyReportRepository();
       const today = new Date();
 
-      if(this.currentUserId == null) {
+      if(this.currentUserId == null && this.currentUser == null) {
         return;
       }
 
+      const currentUserId = this.currentUser != null ? this.currentUser.id : this.currentUserId;
+
       if(this.dailyReportId != null) {
-        repository.update(this.currentUserId, this.dailyReportId, this.date, this.title, this.content)
+        repository.update(currentUserId, this.dailyReportId, this.date, this.title, this.content)
           .then(() => location.href = '/');
       } else {
-        repository.create(this.currentUserId, this.date, this.title, this.content)
+        repository.create(currentUserId, this.date, this.title, this.content)
           .then(() => {
             this.date = DateConverter.dateToString(today, false);
             this.title = '';
@@ -32,8 +34,10 @@ export default {
     const repository = new DailyReportRepository();
     const today = new Date();
 
-    if(this.currentUserId != null && this.dailyReportId != null) {
-      repository.fetch(this.currentUserId, this.dailyReportId)
+    if((this.currentUser != null || this.currentUserId != null) && this.dailyReportId != null) {
+      const currentUserId = this.currentUser != null ? this.currentUser.id : this.currentUserId;
+
+      repository.fetch(currentUserId, this.dailyReportId)
         .then(dailyReport => {
           this.date = dailyReport.date;
           this.title = dailyReport.title;
