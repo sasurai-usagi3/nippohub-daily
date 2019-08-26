@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main-header :currentUserId="currentUserId"></main-header>
+    <main-header :currentUser="currentUser"></main-header>
     <div class="l-container" v-if="currentUserId != null">
       <form class="u-text-align--right" action="/">
         <span>表示範囲</span>
