@@ -1,7 +1,7 @@
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
 export default {
-  props: ['startAt', 'endAt', 'currentUserId'],
+  props: ['startAt', 'endAt', 'currentUser'],
   data: function() {
     return {dailyReports: []};
   },
@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     attachListener() {
-      if(this.currentUserId == null) {
+      if(this.currentUser == null) {
         return;
       }
 
@@ -26,7 +26,7 @@ export default {
         new Date(this.endAt) : endDateOfThisMonth;
       const repository = new DailyReportRepository();
 
-      repository.fetchList(this.currentUserId, startAt, endAt)
+      repository.fetchList(this.currentUser.id, startAt, endAt)
         .then(dailyReportList => this.dailyReports = dailyReportList);
     }
   }

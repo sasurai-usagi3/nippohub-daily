@@ -13,7 +13,7 @@
       </div>
       <div>
         <h2 class="p-sub-title">{{ firstDate }} ~ {{ endDate }} の日報</h2>
-        <daily-report-list :currentUserId="currentUserId" :start-at="firstDate" :end-at="endDate"></daily-report-list>
+        <daily-report-list :currentUser="currentUser" :start-at="firstDate" :end-at="endDate"></daily-report-list>
         <div class="u-mt--2rem" style="display: flex;justify-content: space-between" v-if="$route.query.no_link == null">
           <nuxt-link :to="{path: '/', query: {start_at: firstDateOfPrevMonth, end_at: endDateOfPrevMonth}}">&lt; 先月</nuxt-link>
           <nuxt-link :to="{path: '/', query: {start_at: firstDateOfNextMonth, end_at: endDateOfNextMonth}}">次月 &gt;</nuxt-link>
