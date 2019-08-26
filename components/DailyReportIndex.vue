@@ -1,7 +1,7 @@
 <template>
   <div>
     <main-header :currentUser="currentUser"></main-header>
-    <div class="l-container" v-if="currentUserId != null">
+    <div class="l-container" v-if="currentUser != null">
       <form class="u-text-align--right" action="/">
         <span>表示範囲</span>
         <input type="hidden" name="no_link" value="true">
