@@ -1,33 +1,43 @@
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
+const getTermOfTargetDailyReports = (basisDate, startDate, endDate) => {
+  const firstDateOfMonth = new Date(basisDate.getFullYear(), basisDate.getMonth(), 1, 0, 0, 0, 0);
+  const endDateOfMonth = new Date(basisDate.getFullYear(), basisDate.getMonth() + 1, 0, 0, 0, 0, 0); // 年の繰り上げを考えなくてもよしなにやってくれるので問題なし。日付を0にすることで当月の最終日となる
+
+  return [startDate != null ?  new Date(startDate) : firstDateOfMonth, endDate != null ?  new Date(endDate) : endDateOfMonth];
+}
+
+const fetchDailyReport = (currentUser, startDate, endDate) => {
+  if (currentUser == null) {
+    return;
+  }
+
+  return new DailyReportRepository().fetchList(currentUser.id, startDate, endDate)
+}
+
 export default {
-  props: ['startAt', 'endAt', 'currentUser'],
+  props: ['currentUser', 'startAt', 'endAt'],
   data: function() {
     return {dailyReports: []};
   },
-  mounted: function() {
-    this.attachListener();
-  },
-  beforeUpdate: function() {
-    this.attachListener();
-  },
-  methods: {
-    attachListener() {
-      if(this.currentUser == null) {
-        return;
-      }
+  watch: {
+    startAt: function() {
+      const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startAt, this.endAt);
 
-      const today = new Date();
-      const firstDateOfThisMonth = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0, 0);
-      const endDateOfThisMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0, 0, 0, 0, 0); // 年の繰り上げを考えなくてもよしなにやってくれるので問題なし。日付を0にすることで当月の最終日となる
-      const startAt = (this.startAt != null && this.startAt !== '') ?
-        new Date(this.startAt) : firstDateOfThisMonth;
-      const endAt = (this.endAt != null && this.endAt !== '') ?
-        new Date(this.endAt) : endDateOfThisMonth;
-      const repository = new DailyReportRepository();
+      fetchDailyReport(this.currentUser, startDate, endDate)
+        .then(dailyReportList => this.dailyReports = dailyReportList);
+    },
+    endAt: function() {
+      const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startAt, this.endAt);
 
-      repository.fetchList(this.currentUser.id, startAt, endAt)
+      fetchDailyReport(this.currentUser, startDate, endDate)
         .then(dailyReportList => this.dailyReports = dailyReportList);
     }
+  },
+  mounted: function() {
+    const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startAt, this.endAt);
+
+    fetchDailyReport(this.currentUser, startDate, endDate)
+      .then(dailyReportList => this.dailyReports = dailyReportList);
   }
 }
