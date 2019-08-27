@@ -16,26 +16,26 @@ const fetchDailyReport = (currentUser, startDate, endDate) => {
 }
 
 export default {
-  props: ['currentUser', 'startAt', 'endAt'],
+  props: ['currentUser', 'startDate', 'endDate'],
   data: function() {
     return {dailyReports: []};
   },
   watch: {
-    startAt: function() {
-      const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startAt, this.endAt);
+    startDate: function() {
+      const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startDate, this.endDate);
 
       fetchDailyReport(this.currentUser, startDate, endDate)
         .then(dailyReportList => this.dailyReports = dailyReportList);
     },
-    endAt: function() {
-      const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startAt, this.endAt);
+    endDate: function() {
+      const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startDate, this.endDate);
 
       fetchDailyReport(this.currentUser, startDate, endDate)
         .then(dailyReportList => this.dailyReports = dailyReportList);
     }
   },
   mounted: function() {
-    const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startAt, this.endAt);
+    const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startDate, this.endDate);
 
     fetchDailyReport(this.currentUser, startDate, endDate)
       .then(dailyReportList => this.dailyReports = dailyReportList);
