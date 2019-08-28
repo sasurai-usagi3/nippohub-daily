@@ -4,6 +4,7 @@ import MainHeader from '~/components/MainHeader.vue';
 import DailyReportForm from '~/components/DailyReportForm.vue';
 import DailyReportList from '~/components/DailyReportList.vue';
 import DailyReportListLink from '~/components/DailyReportListLink.vue';
+import DailyReportSearchForm from '~/components/DailyReportSearchForm.vue';
 import MainFooter from '~/components/MainFooter.vue';
 
 export default {
@@ -12,6 +13,7 @@ export default {
     DailyReportForm,
     DailyReportList,
     DailyReportListLink,
+    DailyReportSearchForm,
     MainHeader,
     MainFooter
   },

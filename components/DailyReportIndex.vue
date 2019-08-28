@@ -2,12 +2,7 @@
   <div>
     <main-header :currentUser="currentUser"></main-header>
     <div class="l-container" v-if="currentUser != null">
-      <form class="u-text-align--right" action="/">
-        <span>表示範囲</span>
-        <input type="hidden" name="no_link" value="true">
-        <input type="date" name="start_at" class="p-oneline-input" :value="firstDate">&nbsp;~&nbsp;<input type="date" name="end_at" class="p-oneline-input" :value="endDate">
-        <button type="submit" class="p-submit">検索</button>
-      </form>
+      <daily-report-search-form :start-date="firstDate" :end-date="endDate"></daily-report-search-form>
       <div class="u-mt--3rem">
         <daily-report-form :currentUser="currentUser"></daily-report-form>
       </div>
