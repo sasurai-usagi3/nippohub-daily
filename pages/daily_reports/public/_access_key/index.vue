@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main-header :currentUserId="currentUserId"></main-header>
+    <main-header :currentUser="currentUser"></main-header>
     <div class="l-container">
       <DailyReportPublicDetail :access-key="$route.params.access_key"></DailyReportPublicDetail>
     </div>
