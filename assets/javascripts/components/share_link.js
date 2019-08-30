@@ -1,4 +1,5 @@
-import firebase from '~/assets/javascripts/util/firebase.js';
+import AccessKeyRepository from '~/assets/javascripts/repositories/access_key_repository';
+import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
 export default {
   props: ['currentUserId', 'dailyReportId', 'initAccessKey'],
@@ -7,42 +8,41 @@ export default {
   },
   methods: {
     generateAccessKey: function() {
-      const database = firebase.database();
+      const accessKeyRepository = new AccessKeyRepository();
+      const dailyReportRepository = new DailyReportRepository();
 
       if(this.currentUserId == null || this.accessKey != null) {
         return; // TODO: ユーザがいない時の処理
       }
 
       // TODO: トランザクション張る
+      accessKeyRepository.create(this.currentUserId, this.dailyReportId).then(accessKey => {
+        this.accessKey = accessKey;
 
-      const accessKey = database.ref(`access_keys`).push({
-        user_id: this.currentUserId,
-        daily_report_id: this.dailyReportId
+        return dailyReportRepository.updateAccessKey(this.currentUserId, this.dailyReportId, accessKey);
+      }).catch(() => {
+        // TODO: 更新失敗時の処理
+        console.fatal('更新に失敗しました');
       });
-
-      database.ref(`users/${this.currentUserId}/daily_reports/${this.dailyReportId}`).update({
-        access_key: accessKey.key
-      });
-
-      this.accessKey = accessKey.key;
     },
     dismissAccessKey: function() {
-      const database = firebase.database();
+      const accessKeyRepository = new AccessKeyRepository();
+      const dailyReportRepository = new DailyReportRepository();
 
       if(this.currentUserId == null || this.accessKey == null) {
         return; // TODO: ユーザがいない時の処理
       }
 
-      database.ref(`users/${this.currentUserId}/daily_reports/${this.dailyReportId}`).update({
-        access_key: null
-      });
+      // TODO: トランザクション張る
+      dailyReportRepository.updateAccessKey(this.currentUserId, this.dailyReportId, null).then(() => {
+        const accessKey = this.accessKey;
+        this.accessKey = null;
 
-      database.ref(`access_keys/${this.accessKey}`).update({
-        user_id: null,
-        daily_report_id: null
+        return accessKeyRepository.delete(accessKey);
+      }).catch(() => {
+        // TODO: 更新失敗時の処理
+        console.fatal('更新に失敗しました');
       });
-
-      this.accessKey = null;
     }
   },
   mounted: function() {

@@ -1,14 +1,12 @@
-import firebase from '~/assets/javascripts/util/firebase.js';
+import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
 export default {
-  props: ['dailyReportId'],
+  props: ['currentUserId', 'dailyReportId'],
   methods: {
     destroy: function() {
-      const database = firebase.database();
+      const repository = new DailyReportRepository();
 
-      database.ref(`daily_reports/${this.dailyReportId}`).remove().then(() => {
-        console.log('test');
-      });
+      repository.delete(this.currentUserId, this.dailyReportId).then(() => location.href = '/');
     }
   }
 }

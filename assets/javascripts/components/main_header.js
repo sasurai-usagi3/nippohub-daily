@@ -1,12 +1,12 @@
-import firebase from '~/assets/javascripts/util/firebase.js';
+import UserRepository from '~/assets/javascripts/repositories/user_repository';
 
 export default {
-  props: ['currentUserId'],
+  props: ['currentUserId', 'currentUser'], // TODO: currentUserIdを消す
   methods: {
     signOut: function() {
-      const auth = firebase.auth();
+      const repository = new UserRepository();
 
-      auth.signOut();
+      repository.clearSession().then(() => location.href = '/');
     }
   }
 }

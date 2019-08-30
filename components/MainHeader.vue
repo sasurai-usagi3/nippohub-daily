@@ -4,7 +4,7 @@
       <h1 class="p-page-title"><nuxt-link to="/">NippoHub</nuxt-link></h1>
       <nav>
         <ul class="p-auth-links">
-          <li class="p-auth-links__item" v-if="currentUserId !== null" @click="signOut">Sign out</li>
+          <li class="p-auth-links__item" v-if="currentUser != null || currentUserId != null" @click="signOut">Sign out</li>
           <template v-else>
             <li class="p-auth-links__item"><nuxt-link to="/sign_in">Sign in</nuxt-link></li>
             <li class="p-auth-links__item"><nuxt-link to="/sign_up">Sign up</nuxt-link></li>
