@@ -23,7 +23,7 @@ export default {
     const firstDate = firstDateFromParams != null && firstDateFromParams !== '' ? new Date(Date.parse(firstDateFromParams)) : new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0, 0);
     const endDate = endDateFromParams != null && endDateFromParams !== '' ? new Date(Date.parse(endDateFromParams)) : new Date(today.getFullYear(), today.getMonth() + 1, 0, 0, 0, 0, 0);
 
-    return {currentUser: null, firstDate, endDate}
+    return {currentUser: null, dailyReportListVersion: Date.now(), firstDate, endDate}
   },
   watch: {
     '$route': function() {
@@ -49,5 +49,11 @@ export default {
     repository.fetch().then(user => {
       this.currentUser = user;
     });
+  },
+  methods: {
+    updateDailyReportListVersion: function() {
+      this.dailyReportListVersion = Date.now();
+      console.log('x');
+    }
   }
 }

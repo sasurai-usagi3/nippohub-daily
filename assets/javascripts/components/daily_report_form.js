@@ -26,6 +26,8 @@ export default {
             this.date = DateConverter.dateToString(today, false);
             this.title = '';
             this.content = '';
+
+            this.$emit('submitted');
           });
       }
     }

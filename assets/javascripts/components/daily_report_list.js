@@ -16,7 +16,7 @@ const fetchDailyReport = (currentUser, startDate, endDate) => {
 }
 
 export default {
-  props: ['currentUser', 'startDate', 'endDate'],
+  props: ['currentUser', 'startDate', 'endDate', 'version'],
   data: function() {
     return {dailyReports: []};
   },
@@ -28,6 +28,12 @@ export default {
         .then(dailyReportList => this.dailyReports = dailyReportList);
     },
     endDate: function() {
+      const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startDate, this.endDate);
+
+      fetchDailyReport(this.currentUser, startDate, endDate)
+        .then(dailyReportList => this.dailyReports = dailyReportList);
+    },
+    version: function() {
       const [startDate, endDate] = getTermOfTargetDailyReports(new Date(), this.startDate, this.endDate);
 
       fetchDailyReport(this.currentUser, startDate, endDate)
