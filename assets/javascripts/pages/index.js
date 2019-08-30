@@ -17,8 +17,10 @@ export default {
   },
   data: function() {
     const today = new Date();
-    const firstDate = new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0, 0);
-    const endDate = new Date(today.getFullYear(), today.getMonth() + 1, 0, 0, 0, 0, 0);
+    const firstDateFromParams = this.$route.query.start_at;
+    const endDateFromParams = this.$route.query.end_at;
+    const firstDate = firstDateFromParams != null && firstDateFromParams !== '' ? new Date(Date.parse(firstDateFromParams)) : new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0, 0);
+    const endDate = endDateFromParams != null && endDateFromParams !== '' ? new Date(Date.parse(endDateFromParams)) : new Date(today.getFullYear(), today.getMonth() + 1, 0, 0, 0, 0, 0);
 
     return {currentUser: null, firstDate, endDate}
   },
