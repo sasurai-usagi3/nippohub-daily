@@ -2,7 +2,7 @@ import AccessKeyRepository from '~/assets/javascripts/repositories/access_key_re
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 
 export default {
-  props: ['currentUserId', 'dailyReportId', 'initAccessKey'],
+  props: ['currentUser', 'dailyReportId', 'initAccessKey'],
   data: function() {
     return {accessKey: null}
   },
@@ -11,15 +11,15 @@ export default {
       const accessKeyRepository = new AccessKeyRepository();
       const dailyReportRepository = new DailyReportRepository();
 
-      if(this.currentUserId == null || this.accessKey != null) {
+      if(this.currentUser.id == null || this.accessKey != null) {
         return; // TODO: ユーザがいない時の処理
       }
 
       // TODO: トランザクション張る
-      accessKeyRepository.create(this.currentUserId, this.dailyReportId).then(accessKey => {
+      accessKeyRepository.create(this.currentUser.id, this.dailyReportId).then(accessKey => {
         this.accessKey = accessKey;
 
-        return dailyReportRepository.updateAccessKey(this.currentUserId, this.dailyReportId, accessKey);
+        return dailyReportRepository.updateAccessKey(this.currentUser.id, this.dailyReportId, accessKey);
       }).catch(() => {
         // TODO: 更新失敗時の処理
         console.fatal('更新に失敗しました');
@@ -29,12 +29,12 @@ export default {
       const accessKeyRepository = new AccessKeyRepository();
       const dailyReportRepository = new DailyReportRepository();
 
-      if(this.currentUserId == null || this.accessKey == null) {
+      if(this.currentUser.id == null || this.accessKey == null) {
         return; // TODO: ユーザがいない時の処理
       }
 
       // TODO: トランザクション張る
-      dailyReportRepository.updateAccessKey(this.currentUserId, this.dailyReportId, null).then(() => {
+      dailyReportRepository.updateAccessKey(this.currentUser.id, this.dailyReportId, null).then(() => {
         const accessKey = this.accessKey;
         this.accessKey = null;
 

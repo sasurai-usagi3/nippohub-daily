@@ -4,18 +4,18 @@ import ShareLink from '~/components/ShareLink.vue';
 
 export default {
   components: {ShareLink},
-  props: ['currentUserId', 'dailyReportId'],
+  props: ['currentUser', 'dailyReportId'],
   data: function() {
     return {title: '', content: '', accessKey: null, didFind: false};
   },
   mounted: function() {
-    if(this.currentUserId == null) {
+    if(this.currentUser == null) {
       return;
     }
 
     const repository = new DailyReportRepository();
 
-    repository.fetch(this.currentUserId, this.dailyReportId)
+    repository.fetch(this.currentUser.id, this.dailyReportId)
       .then(dailyReport => {
         this.title = `${dailyReport.date} ${dailyReport.title}`;
         this.content = marked(dailyReport.content);
