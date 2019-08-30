@@ -53,7 +53,6 @@ export default {
   methods: {
     updateDailyReportListVersion: function() {
       this.dailyReportListVersion = Date.now();
-      console.log('x');
     }
   }
 }
