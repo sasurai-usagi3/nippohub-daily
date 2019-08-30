@@ -7,7 +7,7 @@
         <daily-report-form :currentUser="currentUser"></daily-report-form>
       </div>
       <div>
-        <h2 class="p-sub-title">{{ firstDate }} ~ {{ endDate }} の日報</h2>
+        <h2 class="p-sub-title">{{ firstDateStr }} ~ {{ endDateStr }} の日報</h2>
         <daily-report-list :currentUser="currentUser" :start-date="firstDate" :end-date="endDate"></daily-report-list>
         <daily-report-list-link :basis-date="firstDate || new Date()" v-if="$route.query.no_link == null"></daily-report-list-link>
       </div>

@@ -5,6 +5,7 @@ import DailyReportListLink from '~/components/DailyReportListLink.vue';
 import DailyReportSearchForm from '~/components/DailyReportSearchForm.vue';
 import MainFooter from '~/components/MainFooter.vue';
 import UserRepository from '~/assets/javascripts/repositories/user_repository';
+import DateConverter from '~/assets/javascripts/util/date_converter';
 
 export default {
   components: {
@@ -32,6 +33,14 @@ export default {
 
       this.firstDate = firstDateFromParams != null && firstDateFromParams !== '' ? new Date(Date.parse(firstDateFromParams)) : new Date(today.getFullYear(), today.getMonth(), 1, 0, 0, 0, 0);
       this.endDate = endDateFromParams != null && endDateFromParams !== '' ? new Date(Date.parse(endDateFromParams)) : new Date(today.getFullYear(), today.getMonth() + 1, 0, 0, 0, 0, 0);
+    }
+  },
+  computed: {
+    firstDateStr: function() {
+      return DateConverter.dateToString(this.firstDate, false);
+    },
+    endDateStr: function() {
+      return DateConverter.dateToString(this.endDate, false);
     }
   },
   mounted: function() {
