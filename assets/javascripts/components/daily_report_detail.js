@@ -1,9 +1,10 @@
 import marked from '~/assets/javascripts/util/marked';
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
 import ShareLink from '~/components/ShareLink.vue';
+import DailyReportCommentList from '~/components/DailyReportCommentList.vue';
 
 export default {
-  components: {ShareLink},
+  components: {ShareLink, DailyReportCommentList},
   props: ['currentUser', 'dailyReportId'],
   data: function() {
     return {title: '', content: '', accessKey: null, didFind: false};

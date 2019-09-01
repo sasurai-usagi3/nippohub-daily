@@ -6,6 +6,7 @@
         <h1>{{ title }}</h1>
         <main v-html="content"></main>
       </article>
+      <DailyReportCommentList :daily-report-id="dailyReportId"></DailyReportCommentList>
     </div>
   </div>
 </template>

@@ -1,11 +1,13 @@
 import marked from '~/assets/javascripts/util/marked';
 import AccessKeyRepository from '~/assets/javascripts/repositories/access_key_repository';
 import DailyReportRepository from '~/assets/javascripts/repositories/daily_report_repository';
+import DailyReportCommentList from '~/components/DailyReportCommentList.vue';
 
 export default {
+  components: {DailyReportCommentList},
   props: ['accessKey'],
   data: function() {
-    return {title: '', content: '', didFind: false};
+    return {dailyReportId: null, title: '', content: '', didFind: false};
   },
   mounted: function() {
     const accessKeyRepository = new AccessKeyRepository();
@@ -14,6 +16,8 @@ export default {
     accessKeyRepository.fetch(this.accessKey).then(accessKey => {
       const userId = accessKey.userId;
       const dailyReportId = accessKey.dailyReportId;
+
+      this.dailyReportId = dailyReportId;
 
       return dailyReportRepository.fetch(userId, dailyReportId);
     }).then(dailyReport => {
