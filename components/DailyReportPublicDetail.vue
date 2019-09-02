@@ -5,7 +5,8 @@
         <h1>{{ title }}</h1>
         <main v-html="content"></main>
       </article>
-      <DailyReportCommentList :daily-report-id="dailyReportId"></DailyReportCommentList>
+      <DailyReportCommentForm :current-user="currentUser" :daily-report-id="dailyReportId" v-on:submitted="updateDailyReportCommentVersion"></DailyReportCommentForm>
+      <DailyReportCommentList :daily-report-id="dailyReportId" :version="dailyReportCommentVersion"></DailyReportCommentList>
     </template>
     <div v-else>
       日報が見つかりませんでした

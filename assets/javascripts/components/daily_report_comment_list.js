@@ -6,7 +6,14 @@ export default {
   data: function() {
     return {dailyReportComments: []}
   },
-  props: ['dailyReportId'],
+  props: ['dailyReportId', 'version'],
+  watch: {
+    version: function() {
+      return new DailyReportCommentRepository().fetch(this.dailyReportId).then(
+        dailyReportComments => this.dailyReportComments = dailyReportComments
+      );
+    }
+  },
   mounted: function() {
     return new DailyReportCommentRepository().fetch(this.dailyReportId).then(
       dailyReportComments => this.dailyReportComments = dailyReportComments
