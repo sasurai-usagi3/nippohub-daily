@@ -16,12 +16,3 @@
 .p-daily-report-list__item:nth-last-of-type(n + 2) {
   border-bottom: 0.1em solid #ddd;
 }
-
-/* TODO: Fondation層に */
-h3 {
-  margin: 0;
-}
-
-.u-mt-05 {
-  margin-top: 0.5em;
-}

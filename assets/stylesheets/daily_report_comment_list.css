@@ -1,0 +1,35 @@
+/* TODO: Fondation層に */
+.u-mt-05 {
+  margin-top: 0.5em;
+}
+
+/* 以下本文 */
+.p-daily-report-comment-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  border-top: 0.1em solid #ddd;
+  border-bottom: 0.1em solid #ddd;
+}
+
+.p-daily-report-comment-list__item {
+  padding: 0.5em 1.5em;
+}
+
+.p-daily-report-comment-list__item p, .p-daily-report-comment-list__item h1, .p-daily-report-comment-list__item h2, .p-daily-report-comment-list__item h3, .p-daily-report-comment-list__item ul {
+  padding: 0;
+  margin: 0;
+}
+
+.p-daily-report-comment-list__item__date {
+  font-size: 0.7em;
+}
+
+.p-daily-report-comment-list__item__content {
+  font-size: 1em;
+  margin-top: 0.7em;
+}
+
+.p-daily-report-comment-list__item:nth-last-of-type(n + 2) {
+  border-bottom: 0.1em solid #ddd;
+}
