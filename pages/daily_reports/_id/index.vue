@@ -1,8 +1,8 @@
 <template>
   <div>
-    <main-header :currentUserId="currentUserId"></main-header>
+    <main-header :currentUser="currentUser"></main-header>
     <div class="l-container">
-      <DailyReportDetail :daily-report-id="$route.params.id" :current-user-id="currentUserId" v-if="currentUserId != null"></DailyReportDetail>
+      <DailyReportDetail :daily-report-id="$route.params.id" :current-user="currentUser" v-if="currentUser != null"></DailyReportDetail>
     </div>
     <main-footer></main-footer>
   </div>

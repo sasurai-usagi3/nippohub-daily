@@ -10,13 +10,13 @@ export default {
     MainFooter
   },
   data: function() {
-    return {currentUserId: null};
+    return {currentUser: null};
   },
   mounted: function() {
     const repository = new UserRepository();
 
     repository.fetch().then(user => {
-      this.currentUserId = (user != null) ? user.id : null;
+      this.currentUser = user;
     });
   }
 }

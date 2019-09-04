@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main-header :currentUserId="null"></main-header>
+    <main-header :currentUser="null"></main-header>
     <div class="l-container p-auth-form">
       <form @submit.prevent="signUp">
         <div>

@@ -1,8 +1,8 @@
 <template>
   <div>
-    <main-header :currentUserId="currentUserId"></main-header>
+    <main-header :currentUser="currentUser"></main-header>
     <div class="l-container">
-      <DailyReportPublicDetail :access-key="$route.params.access_key"></DailyReportPublicDetail>
+      <DailyReportPublicDetail :access-key="$route.params.access_key" :currentUser="currentUser"></DailyReportPublicDetail>
     </div>
     <main-footer></main-footer>
   </div>

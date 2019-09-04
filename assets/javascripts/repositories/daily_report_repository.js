@@ -21,9 +21,8 @@ export default class DailyReportRepository {
 
       for(let dailyReportId in rawDailyReportList) {
         const dailyReport = rawDailyReportList[dailyReportId];
-        const createdAt = new Date(dailyReport.createdAt);
 
-        dailyReportList.push(new DailyReport(dailyReportId, dailyReport.date, dailyReport.title, dailyReport.content, DateConverter.dateToString(createdAt), dailyReport.access_key));
+        dailyReportList.push(new DailyReport(dailyReportId, dailyReport.date, dailyReport.title, dailyReport.content, dailyReport.access_key));
       }
 
       return dailyReportList.sort((x1, x2) => {
@@ -47,9 +46,7 @@ export default class DailyReportRepository {
         return;
       }
 
-      const createdAt = new Date(dailyReport.createdAt);
-
-      return new DailyReport(dailyReport.Id, dailyReport.date, dailyReport.title, dailyReport.content, DateConverter.dateToString(createdAt), dailyReport.access_key);
+      return new DailyReport(dailyReport.Id, dailyReport.date, dailyReport.title, dailyReport.content, dailyReport.access_key);
     });
   }
 

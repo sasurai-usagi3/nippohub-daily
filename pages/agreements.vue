@@ -1,6 +1,6 @@
 <template>
   <div>
-    <main-header :currentUserId="currentUserId"></main-header>
+    <main-header :currentUser="currentUser"></main-header>
     <div class="l-container">
       <iframe class="p-embedded-content" src="/agreements_content.html"></iframe>
     </div>
