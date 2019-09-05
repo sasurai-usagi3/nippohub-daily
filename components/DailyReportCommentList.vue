@@ -3,6 +3,7 @@
     <li class="p-daily-report-comment-list__item" v-for="dailyReportComment in dailyReportComments">
       <div class="p-daily-report-comment-list__item__date">{{ dateToString(dailyReportComment.postAt) }}</div>
       <div class="p-daily-report-comment-list__item__content" v-html="parseMD(dailyReportComment.content)"></div>
+      <a href="#" @click.prevent="destroy" :data-comment-id="dailyReportComment.id" v-if="currentUser.id == dailyReportComment.userId">削除</a>
     </li>
   </ul>
 </template>

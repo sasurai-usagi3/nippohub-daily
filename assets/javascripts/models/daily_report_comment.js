@@ -1,6 +1,8 @@
 export default class DailyReportComment {
-  constructor(content, postAt) {
+  constructor(id, content, userId, postAt) {
+    this.id = id;
     this.content = content;
+    this.userId = userId;
     this.postAt = postAt;
   }
 }

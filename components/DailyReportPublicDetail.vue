@@ -7,7 +7,7 @@
       </article>
       <h2 class="u-mt--1rem">コメント</h2>
       <DailyReportCommentForm :current-user="currentUser" :daily-report-id="dailyReportId" v-on:submitted="updateDailyReportCommentVersion"></DailyReportCommentForm>
-      <DailyReportCommentList :daily-report-id="dailyReportId" :version="dailyReportCommentVersion" class="u-mt--1rem"></DailyReportCommentList>
+      <DailyReportCommentList :current-user="currentUser" :daily-report-id="dailyReportId" :version="dailyReportCommentVersion" class="u-mt--1rem"></DailyReportCommentList>
     </template>
     <div v-else>
       日報が見つかりませんでした
