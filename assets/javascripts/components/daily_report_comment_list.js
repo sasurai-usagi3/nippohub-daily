@@ -6,7 +6,7 @@ export default {
   data: function() {
     return {dailyReportComments: []}
   },
-  props: ['dailyReportId', 'version'],
+  props: ['currentUser', 'dailyReportId', 'version'],
   watch: {
     version: function() {
       return new DailyReportCommentRepository().fetch(this.dailyReportId).then(
