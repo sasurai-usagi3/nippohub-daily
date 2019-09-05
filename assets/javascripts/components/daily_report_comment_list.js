@@ -25,6 +25,16 @@ export default {
     },
     parseMD: function(content) {
       return marked(content);
+    },
+    destroy: function(e) {
+      const target = e.currentTarget;
+      const commentId = target.dataset.commentId;
+
+      new DailyReportCommentRepository()
+        .delete(this.dailyReportId, commentId)
+        .then(() => {
+          this.dailyReportComments = this.dailyReportComments.filter(x => x.id != commentId);
+        });
     }
   }
 }
