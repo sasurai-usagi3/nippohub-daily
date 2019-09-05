@@ -11,7 +11,7 @@ export default class DailyReportCommentRepository {
         const dailyReportComment = rawDailyReportCommentList[dailyReportCommentId];
         const postAt = new Date(dailyReportComment.post_at);
 
-        dailyReportCommentList.push(new DailyReportComment(dailyReportComment.content, postAt));
+        dailyReportCommentList.push(new DailyReportComment(dailyReportCommentId, dailyReportComment.content, postAt));
       }
 
       return dailyReportCommentList.sort((x1, x2) => {
