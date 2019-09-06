@@ -16,9 +16,8 @@ export default {
     const isTestMode = this.$route.query.testMode == 'open_app';
 
     if (isTestMode && navigator.userAgent.match(/(iPhone|iPod|Android)/i)) {
-      console.log('SP');
       if (confirm('アプリで開きますか?')) {
-        console.log('Open App');
+        location.href = `nippohub://daily_report/${this.$route.params.access_key}`
       }
     }
 
