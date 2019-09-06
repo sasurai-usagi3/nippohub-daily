@@ -13,7 +13,9 @@ export default {
     return {currentUser: null};
   },
   mounted: function() {
-    if (navigator.userAgent.match(/(iPhone|iPod|Android)/i)) {
+    const isTestMode = this.$route.query.testMode == 'open_app';
+
+    if (isTestMode && navigator.userAgent.match(/(iPhone|iPod|Android)/i)) {
       console.log('SP');
       if (confirm('アプリで開きますか?')) {
         console.log('Open App');
