@@ -13,6 +13,14 @@ export default {
     return {currentUser: null};
   },
   mounted: function() {
+    const isTestMode = this.$route.query.testMode == 'open_app';
+
+    if (isTestMode && navigator.userAgent.match(/(iPhone|iPod|Android)/i)) {
+      if (confirm('アプリで開きますか?')) {
+        location.href = `nippohub://daily_report/${this.$route.params.access_key}`
+      }
+    }
+
     const repository = new UserRepository();
 
     repository.fetch().then(user => {
