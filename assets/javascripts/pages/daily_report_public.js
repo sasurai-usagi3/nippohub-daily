@@ -13,6 +13,13 @@ export default {
     return {currentUser: null};
   },
   mounted: function() {
+    if (navigator.userAgent.match(/(iPhone|iPod|Android)/i)) {
+      console.log('SP');
+      if (confirm('アプリで開きますか?')) {
+        console.log('Open App');
+      }
+    }
+
     const repository = new UserRepository();
 
     repository.fetch().then(user => {
